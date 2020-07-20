@@ -40,12 +40,10 @@ namespace AutoRun
         public String Encrypt(String toEncrypt)
         {
             String Result;
-            Byte[] buffer;
 
-            buffer = Encoding.Default.GetBytes(toEncrypt);
             try
             {
-                Result = Encoding.Default.GetString(this.rc2.CreateEncryptor().TransformFinalBlock(buffer, 0, buffer.Length));
+                Result = Encoding.Default.GetString(this.rc2.CreateEncryptor().TransformFinalBlock(Encoding.Default.GetBytes(toEncrypt), 0, Encoding.Default.GetBytes(toEncrypt).Length));
             }
             catch (Exception ex)
             {
@@ -58,12 +56,10 @@ namespace AutoRun
         public String Decrypt(String toDecrypt)
         {
             String Result;
-            Byte[] buffer;
 
-            buffer = Encoding.Default.GetBytes(toDecrypt);
             try
             {
-                Result = Encoding.Default.GetString(this.rc2.CreateDecryptor().TransformFinalBlock(buffer, 0, buffer.Length));
+                Result = Encoding.Default.GetString(this.rc2.CreateDecryptor().TransformFinalBlock(Encoding.Default.GetBytes(toDecrypt), 0, Encoding.Default.GetBytes(toDecrypt).Length));
             }
             catch (Exception ex)
             {
