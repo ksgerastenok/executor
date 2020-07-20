@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Drawing;
 using System.Windows.Forms;
-using System.ComponentModel;
-using System.Collections.Generic;
 
 namespace AutoRun
 {
-    public partial class Settings : Form
+    public partial class Settings : Object
     {
         private Int32 code;
         private static Settings instance;
@@ -21,18 +15,11 @@ namespace AutoRun
             return;
         }
 
-        private Settings()
-        {
-            this.InitializeComponent();
-
-            return;
-        }
-
-        public static Settings Instance
+        public static Form MainForm
         {
             get
             {
-                return Settings.instance;
+                return Settings.instance.MainForm;
             }
         }
 
@@ -65,7 +52,7 @@ namespace AutoRun
 
         private void btnClose_Click(Object sender, EventArgs e)
         {
-            this.Close();
+            this.frmMain.Close();
 
             return;
         }
