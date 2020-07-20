@@ -15,7 +15,7 @@ namespace AutoRun
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(AutoRun.Instance);
+            Application.Run(AutoRun.MainForm);
         }
     }
 }
