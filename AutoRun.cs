@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Drawing;
 using System.Windows.Forms;
 using System.ComponentModel;
 using System.Collections.Generic;
 
 namespace AutoRun
 {
-    public partial class AutoRun : Form
+    public partial class AutoRun : Object
     {
         private Int32 code;
         private String message;
@@ -22,18 +19,11 @@ namespace AutoRun
             return;
         }
 
-        private AutoRun()
-        {
-            this.InitializeComponent();
-
-            return;
-        }
-
-        public static AutoRun Instance
+        public static Form MainForm
         {
             get
             {
-                return AutoRun.instance;
+                return AutoRun.instance.MainForm;
             }
         }
 
@@ -52,7 +42,7 @@ namespace AutoRun
             this.btnRefresh.Enabled = ((!((Properties.Settings.Default.idMega == String.Empty) || (Properties.Settings.Default.dbHost == String.Empty) || (Properties.Settings.Default.dbPort == String.Empty) || (Properties.Settings.Default.dbService == String.Empty) || (CRYUtil.Instance.Decrypt(Properties.Settings.Default.dbLogin) == String.Empty) || (CRYUtil.Instance.Decrypt(Properties.Settings.Default.dbPassword) == String.Empty))) && (!((Properties.Settings.Default.idMega == String.Empty) || (Properties.Settings.Default.srvHost == String.Empty) || (Properties.Settings.Default.srvPort == String.Empty) || (Properties.Settings.Default.srvService == String.Empty) || (CRYUtil.Instance.Decrypt(Properties.Settings.Default.srvLogin) == String.Empty) || (CRYUtil.Instance.Decrypt(Properties.Settings.Default.srvPassword) == String.Empty))));
             this.btnSettings.Enabled = true;
             this.btnClearLog.Enabled = true;
-            this.Text = String.Format("ТБ[{0}] Автоматическая обработка реестров", Properties.Settings.Default.idMega);
+            this.frmMain.Text = String.Format("ТБ[{0}] Автоматическая обработка реестров", Properties.Settings.Default.idMega);
 
             return;
         }
@@ -86,7 +76,7 @@ namespace AutoRun
                     this.btnRefresh.Enabled = false;
                     this.btnSettings.Enabled = false;
                     this.btnClearLog.Enabled = false;
-                    this.Text = String.Format("ТБ[{0}] Автоматическая обработка реестров", Properties.Settings.Default.idMega);
+                    this.frmMain.Text = String.Format("ТБ[{0}] Автоматическая обработка реестров", Properties.Settings.Default.idMega);
 
                     this.bgWorker.RunWorkerAsync();
                 }
@@ -111,7 +101,7 @@ namespace AutoRun
                     this.btnRefresh.Enabled = false;
                     this.btnSettings.Enabled = false;
                     this.btnClearLog.Enabled = false;
-                    this.Text = String.Format("ТБ[{0}] Автоматическая обработка реестров", Properties.Settings.Default.idMega);
+                    this.frmMain.Text = String.Format("ТБ[{0}] Автоматическая обработка реестров", Properties.Settings.Default.idMega);
 
                     this.bgWorker.CancelAsync();
                 }
@@ -144,7 +134,7 @@ namespace AutoRun
                     this.btnRefresh.Enabled = false;
                     this.btnSettings.Enabled = false;
                     this.btnClearLog.Enabled = false;
-                    this.Text = String.Format("ТБ[{0}] Автоматическая обработка реестров", Properties.Settings.Default.idMega);
+                    this.frmMain.Text = String.Format("ТБ[{0}] Автоматическая обработка реестров", Properties.Settings.Default.idMega);
 
                     this.bgWorker.RunWorkerAsync();
                 }
@@ -171,7 +161,7 @@ namespace AutoRun
                     this.btnRefresh.Enabled = false;
                     this.btnSettings.Enabled = false;
                     this.btnClearLog.Enabled = false;
-                    this.Text = String.Format("ТБ[{0}] Автоматическая обработка реестров", Properties.Settings.Default.idMega);
+                    this.frmMain.Text = String.Format("ТБ[{0}] Автоматическая обработка реестров", Properties.Settings.Default.idMega);
 
                     this.bgWorker.CancelAsync();
                 }
@@ -190,7 +180,7 @@ namespace AutoRun
 
             if ((!(this.bgWorker.IsBusy)))
             {
-                Settings.Instance.ShowDialog();
+                Settings.MainForm.ShowDialog();
             }
 
             this.gbType.Enabled = false;
@@ -200,7 +190,7 @@ namespace AutoRun
             this.btnRefresh.Enabled = ((!((Properties.Settings.Default.idMega == String.Empty) || (Properties.Settings.Default.dbHost == String.Empty) || (Properties.Settings.Default.dbPort == String.Empty) || (Properties.Settings.Default.dbService == String.Empty) || (CRYUtil.Instance.Decrypt(Properties.Settings.Default.dbLogin) == String.Empty) || (CRYUtil.Instance.Decrypt(Properties.Settings.Default.dbPassword) == String.Empty))) && (!((Properties.Settings.Default.idMega == String.Empty) || (Properties.Settings.Default.srvHost == String.Empty) || (Properties.Settings.Default.srvPort == String.Empty) || (Properties.Settings.Default.srvService == String.Empty) || (CRYUtil.Instance.Decrypt(Properties.Settings.Default.srvLogin) == String.Empty) || (CRYUtil.Instance.Decrypt(Properties.Settings.Default.srvPassword) == String.Empty))));
             this.btnSettings.Enabled = true;
             this.btnClearLog.Enabled = true;
-            this.Text = String.Format("ТБ[{0}] Автоматическая обработка реестров", Properties.Settings.Default.idMega);
+            this.frmMain.Text = String.Format("ТБ[{0}] Автоматическая обработка реестров", Properties.Settings.Default.idMega);
 
             return;
         }
@@ -225,7 +215,7 @@ namespace AutoRun
             this.btnRefresh.Enabled = this.btnRefresh.Enabled;
             this.btnSettings.Enabled = this.btnSettings.Enabled;
             this.btnClearLog.Enabled = this.btnClearLog.Enabled;
-            this.Text = String.Format("ТБ[{0}] Автоматическая обработка реестров", Properties.Settings.Default.idMega);
+            this.frmMain.Text = String.Format("ТБ[{0}] Автоматическая обработка реестров", Properties.Settings.Default.idMega);
 
             return;
         }
@@ -247,7 +237,7 @@ namespace AutoRun
                 this.btnRefresh.Enabled = this.btnRefresh.Enabled;
                 this.btnSettings.Enabled = this.btnSettings.Enabled;
                 this.btnClearLog.Enabled = this.btnClearLog.Enabled;
-                this.Text = String.Format("ТБ[{0}] Автоматическая обработка реестров", Properties.Settings.Default.idMega);
+                this.frmMain.Text = String.Format("ТБ[{0}] Автоматическая обработка реестров", Properties.Settings.Default.idMega);
             }
 
             return;
@@ -268,7 +258,7 @@ namespace AutoRun
             this.btnRefresh.Enabled = this.btnRefresh.Enabled;
             this.btnSettings.Enabled = this.btnSettings.Enabled;
             this.btnClearLog.Enabled = this.btnClearLog.Enabled;
-            this.Text = String.Format("ТБ[{0}] Автоматическая обработка реестров", Properties.Settings.Default.idMega);
+            this.frmMain.Text = String.Format("ТБ[{0}] Автоматическая обработка реестров", Properties.Settings.Default.idMega);
 
             return;
         }
@@ -288,7 +278,7 @@ namespace AutoRun
             this.btnRefresh.Enabled = this.btnRefresh.Enabled;
             this.btnSettings.Enabled = this.btnSettings.Enabled;
             this.btnClearLog.Enabled = this.btnClearLog.Enabled;
-            this.Text = String.Format("ТБ[{0}] Автоматическая обработка реестров", Properties.Settings.Default.idMega);
+            this.frmMain.Text = String.Format("ТБ[{0}] Автоматическая обработка реестров", Properties.Settings.Default.idMega);
 
             return;
         }
@@ -310,7 +300,7 @@ namespace AutoRun
                 this.btnRefresh.Enabled = this.btnRefresh.Enabled;
                 this.btnSettings.Enabled = this.btnSettings.Enabled;
                 this.btnClearLog.Enabled = this.btnClearLog.Enabled;
-                this.Text = String.Format("ТБ[{0}] Автоматическая обработка реестров", Properties.Settings.Default.idMega);
+                this.frmMain.Text = String.Format("ТБ[{0}] Автоматическая обработка реестров", Properties.Settings.Default.idMega);
             }
 
             return;
@@ -345,12 +335,12 @@ namespace AutoRun
             Result = String.Empty;
             if ((this.rbLists.Checked))
             {
-                Result = String.Format("select unique t.listid, t.state, 0, t.restcount, t.state, {0} from(select unique t.id as listid, t.state as state, t.action as action, t.restcount as restcount, decode(t.division, 6, 'ФТ184(зачисления)', 12, 'Пластик(зачисления)', 2, 'Пластик(списания)', 3, 'Ф190(списания)', 5, decode(t.flowday, t.opdaybegin, 'Капитал.(new)', t.opdayend, 'Капитал.(new)', 'Капитал.(old)'), 4, decode(t.flowday, t.opdaybegin, 'Пролонг.(new)', t.opdayend, 'Пролонг.(new)', 'Пролонг.(old)')) as lsttype, nvl(((sum(decode(t.action, 0,           1, 0)) over(partition by decode(t.division, 6, 'ФТ184(зачисления)', 12, 'Пластик(зачисления)', 2, 'Пластик(списания)', 3, 'Ф190(списания)', 5, decode(t.flowday, t.opdaybegin, 'Капитал.(new)', t.opdayend, 'Капитал.(new)', 'Капитал.(old)'), 4, decode(t.flowday, t.opdaybegin, 'Пролонг.(new)', t.opdayend, 'Пролонг.(new)', 'Пролонг.(old)')) order by decode(t.state, 0, decode(t.userlogin, '*', 0, 1), 1, 3, 3, 1, t.state) asc, t.opdaybegin asc, t.listtype asc, t.id asc)) + (sum(decode(t.action, 0, 0,           1)) over())) /    1, 0) as cntwrk from offcash.depolist t where(((t.flowday) in ((to_date('{1}', 'DD.MM.YYYY')))) and ((t.division) in ((2), (3), (4), (5), (6), (12))) and (not((t.state) in ((4), (5), (8)))) and ((t.id_mega) in (({2}))) and (not(((t.division) in ((2))) and ((t.branchno) in ((select unique t.branchno from offcash.depolist t where(((t.flowday) in ((to_date('{1}', 'DD.MM.YYYY')))) and ((t.division) in ((12))) and (not((t.state) in ((1), (4), (5), (8)))) and ((t.id_mega) in (({2}))))))))))) t where(((t.action) in ((0))) and ((t.lsttype) in (('{3}'))) and ((t.cntwrk) between (0) and ({4})))", type, DateTime.Now.ToString("dd.MM.yyyy"), Properties.Settings.Default.idMega, action, this.numLists.Value);
+                Result = String.Format("select unique t.listid, t.state, 0, t.restcount, t.state, {0} from(select unique t.id as listid, t.state as state, t.action as action, t.restcount as restcount, decode(t.division, 6, 'ФТ184(зачисления)', 12, 'Пластик(зачисления)', 2, 'Пластик(списания)', 3, 'Ф190(списания)', 5, decode(t.flowday, t.opdaybegin, 'Капитал.(new)', t.opdayend, 'Капитал.(new)', 'Капитал.(old)'), 4, decode(t.flowday, t.opdaybegin, 'Пролонг.(new)', t.opdayend, 'Пролонг.(new)', 'Пролонг.(old)')) as lsttype, nvl(((sum(decode(t.action, 0,           1, 0)) over(partition by decode(t.division, 6, 'ФТ184(зачисления)', 12, 'Пластик(зачисления)', 2, 'Пластик(списания)', 3, 'Ф190(списания)', 5, decode(t.flowday, t.opdaybegin, 'Капитал.(new)', t.opdayend, 'Капитал.(new)', 'Капитал.(old)'), 4, decode(t.flowday, t.opdaybegin, 'Пролонг.(new)', t.opdayend, 'Пролонг.(new)', 'Пролонг.(old)')) order by decode(t.state, 0, decode(t.userlogin, '*', 0, 1), 1, 3, 3, 1, t.state) asc, t.opdaybegin asc, t.listtype asc, t.id asc)) + (sum(decode(t.action, 0, 0,           1)) over())) /    1, 0) as cntwrk from offcash.depolist t where(((t.flowday) in ((to_date('{1}', 'DD.MM.YYYY')))) and ((t.division) in ((2), (3), (4), (5), (6), (12))) and (not((t.state) in ((4), (5), (8)))) and ((t.id_mega) in (({2}))) and (not(((t.division) in ((2))) and ((t.branchno) in ((select unique t.branchno from offcash.depolist t where(((t.flowday) in ((to_date('{1}', 'DD.MM.YYYY')))) and ((t.division) in ((12))) and (not((t.state) in ((4), (5), (8)))) and ((t.id_mega) in (({2}))))))))))) t where(((t.action) in ((0))) and ((t.lsttype) in (('{3}'))) and ((t.cntwrk) between (0) and ({4})))", type, DateTime.Now.ToString("dd.MM.yyyy"), Properties.Settings.Default.idMega, action, this.numLists.Value);
                 this.addToMessage(String.Format("MAX cписков (шт.) '{0}'", this.numLists.Value));
             }
             if ((this.rbCount.Checked))
             {
-                Result = String.Format("select unique t.listid, t.state, 0, t.restcount, t.state, {0} from(select unique t.id as listid, t.state as state, t.action as action, t.restcount as restcount, decode(t.division, 6, 'ФТ184(зачисления)', 12, 'Пластик(зачисления)', 2, 'Пластик(списания)', 3, 'Ф190(списания)', 5, decode(t.flowday, t.opdaybegin, 'Капитал.(new)', t.opdayend, 'Капитал.(new)', 'Капитал.(old)'), 4, decode(t.flowday, t.opdaybegin, 'Пролонг.(new)', t.opdayend, 'Пролонг.(new)', 'Пролонг.(old)')) as lsttype, nvl(((sum(decode(t.action, 0, t.restcount, 0)) over(partition by decode(t.division, 6, 'ФТ184(зачисления)', 12, 'Пластик(зачисления)', 2, 'Пластик(списания)', 3, 'Ф190(списания)', 5, decode(t.flowday, t.opdaybegin, 'Капитал.(new)', t.opdayend, 'Капитал.(new)', 'Капитал.(old)'), 4, decode(t.flowday, t.opdaybegin, 'Пролонг.(new)', t.opdayend, 'Пролонг.(new)', 'Пролонг.(old)')) order by decode(t.state, 0, decode(t.userlogin, '*', 0, 1), 1, 3, 3, 1, t.state) asc, t.opdaybegin asc, t.listtype asc, t.id asc)) + (sum(decode(t.action, 0, 0, t.restcount)) over())) / 1000, 0) as cntwrk from offcash.depolist t where(((t.flowday) in ((to_date('{1}', 'DD.MM.YYYY')))) and ((t.division) in ((2), (3), (4), (5), (6), (12))) and (not((t.state) in ((4), (5), (8)))) and ((t.id_mega) in (({2}))) and (not(((t.division) in ((2))) and ((t.branchno) in ((select unique t.branchno from offcash.depolist t where(((t.flowday) in ((to_date('{1}', 'DD.MM.YYYY')))) and ((t.division) in ((12))) and (not((t.state) in ((1), (4), (5), (8)))) and ((t.id_mega) in (({2}))))))))))) t where(((t.action) in ((0))) and ((t.lsttype) in (('{3}'))) and ((t.cntwrk) between (0) and ({4})))", type, DateTime.Now.ToString("dd.MM.yyyy"), Properties.Settings.Default.idMega, action, this.numCount.Value);
+                Result = String.Format("select unique t.listid, t.state, 0, t.restcount, t.state, {0} from(select unique t.id as listid, t.state as state, t.action as action, t.restcount as restcount, decode(t.division, 6, 'ФТ184(зачисления)', 12, 'Пластик(зачисления)', 2, 'Пластик(списания)', 3, 'Ф190(списания)', 5, decode(t.flowday, t.opdaybegin, 'Капитал.(new)', t.opdayend, 'Капитал.(new)', 'Капитал.(old)'), 4, decode(t.flowday, t.opdaybegin, 'Пролонг.(new)', t.opdayend, 'Пролонг.(new)', 'Пролонг.(old)')) as lsttype, nvl(((sum(decode(t.action, 0, t.restcount, 0)) over(partition by decode(t.division, 6, 'ФТ184(зачисления)', 12, 'Пластик(зачисления)', 2, 'Пластик(списания)', 3, 'Ф190(списания)', 5, decode(t.flowday, t.opdaybegin, 'Капитал.(new)', t.opdayend, 'Капитал.(new)', 'Капитал.(old)'), 4, decode(t.flowday, t.opdaybegin, 'Пролонг.(new)', t.opdayend, 'Пролонг.(new)', 'Пролонг.(old)')) order by decode(t.state, 0, decode(t.userlogin, '*', 0, 1), 1, 3, 3, 1, t.state) asc, t.opdaybegin asc, t.listtype asc, t.id asc)) + (sum(decode(t.action, 0, 0, t.restcount)) over())) / 1000, 0) as cntwrk from offcash.depolist t where(((t.flowday) in ((to_date('{1}', 'DD.MM.YYYY')))) and ((t.division) in ((2), (3), (4), (5), (6), (12))) and (not((t.state) in ((4), (5), (8)))) and ((t.id_mega) in (({2}))) and (not(((t.division) in ((2))) and ((t.branchno) in ((select unique t.branchno from offcash.depolist t where(((t.flowday) in ((to_date('{1}', 'DD.MM.YYYY')))) and ((t.division) in ((12))) and (not((t.state) in ((4), (5), (8)))) and ((t.id_mega) in (({2}))))))))))) t where(((t.action) in ((0))) and ((t.lsttype) in (('{3}'))) and ((t.cntwrk) between (0) and ({4})))", type, DateTime.Now.ToString("dd.MM.yyyy"), Properties.Settings.Default.idMega, action, this.numCount.Value);
                 this.addToMessage(String.Format("MAX строк (тыс.) '{0}'", this.numCount.Value));
             }
 
@@ -588,7 +578,7 @@ namespace AutoRun
                     this.btnRefresh.Enabled = true;
                     this.btnSettings.Enabled = true;
                     this.btnClearLog.Enabled = true;
-                    this.Text = String.Format("ТБ[{0}] Автоматическая обработка реестров", Properties.Settings.Default.idMega);
+                    this.frmMain.Text = String.Format("ТБ[{0}] Автоматическая обработка реестров", Properties.Settings.Default.idMega);
 
                     this.btnRefresh.PerformClick();
                 }
@@ -615,7 +605,7 @@ namespace AutoRun
                     this.btnRefresh.Enabled = true;
                     this.btnSettings.Enabled = true;
                     this.btnClearLog.Enabled = true;
-                    this.Text = String.Format("ТБ[{0}] Автоматическая обработка реестров", Properties.Settings.Default.idMega);
+                    this.frmMain.Text = String.Format("ТБ[{0}] Автоматическая обработка реестров", Properties.Settings.Default.idMega);
 
                     this.btnRefresh.PerformClick();
                 }
@@ -673,7 +663,7 @@ namespace AutoRun
                     this.btnRefresh.Enabled = true;
                     this.btnSettings.Enabled = true;
                     this.btnClearLog.Enabled = true;
-                    this.Text = String.Format("ТБ[{0}] Автоматическая обработка реестров", Properties.Settings.Default.idMega);
+                    this.frmMain.Text = String.Format("ТБ[{0}] Автоматическая обработка реестров", Properties.Settings.Default.idMega);
                 }
             }
             else
@@ -698,7 +688,7 @@ namespace AutoRun
                     this.btnRefresh.Enabled = true;
                     this.btnSettings.Enabled = true;
                     this.btnClearLog.Enabled = true;
-                    this.Text = String.Format("ТБ[{0}] Автоматическая обработка реестров", Properties.Settings.Default.idMega);
+                    this.frmMain.Text = String.Format("ТБ[{0}] Автоматическая обработка реестров", Properties.Settings.Default.idMega);
                 }
             }
 
